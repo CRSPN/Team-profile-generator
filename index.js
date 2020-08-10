@@ -1,7 +1,8 @@
-var inquirer=require("inqirer")
+var inquirer=require("inqiurer")
 var Manager=require("./lib/Manager")
 var Engineer=require("./lib/Engineer")
 var Intern=require("./lib/Intern")
+const generateHTML = require("./utils/generateHTML");
 
 let id = 1
 var employeeList = []
@@ -112,6 +113,8 @@ function addIntern(){
     })
 
 }
+
+init();
 
 
 
