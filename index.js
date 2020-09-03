@@ -1,9 +1,10 @@
-var inquirer=require("inqiurer")
+var inquirer=require("inquirer")
 var Manager=require("./lib/Manager")
 var Engineer=require("./lib/Engineer")
 var Intern=require("./lib/Intern")
 const generateHTML = require("./utils/generateHTML");
-
+const card = require("./utils/card")
+const fs =require("fs")
 let id = 1
 var employeeList = []
 function mainMenu(){
@@ -11,7 +12,7 @@ function mainMenu(){
         type:"list",
         message:"Please select position",
         name:"addEmployee",
-        choices:["add Manager", "add Engineer", "add Intern"]
+        choices:["add Manager", "add Engineer", "add Intern", "exit"]
     }).then(function(userInput){
         switch(userInput.addEmployee){
             case "add Manager":
@@ -23,7 +24,22 @@ function mainMenu(){
             case "add Intern":
                 addIntern()
                 break
+            case "exit":
+                exit()  
+            
+                break
         }
+    })
+}
+function exit (){
+    console.log(employeeList)
+    let cardHTML = card(employeeList)
+    let teamHTML = generateHTML(cardHTML)
+
+    fs.writeFile("./index.html", teamHTML, function(error){
+        if (error) 
+        throw error
+        console.log("success")
     })
 }
 function addManager(){
@@ -114,7 +130,7 @@ function addIntern(){
 
 }
 
-init();
+mainMenu();
 
 
 
